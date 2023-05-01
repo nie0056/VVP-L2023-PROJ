@@ -24,4 +24,4 @@ K tomu, aby balíček *gradsolv* fungoval správně, je třeba mít nainstalovan
 
 ## Použití
 
-Použití je ukázáno v souboru *gradsolv_demo.ipynb*, jehož obsahem je demonstrace funcionality daného balíčku.
+Použití je ukázáno v souboru *gradsolv_demo.ipynb*, jehož obsahem je demonstrace funkcionality daného balíčku.
