@@ -6,6 +6,16 @@ from ..precond import grad_preconditioner
 from . import _auxiliary_routines as _aux
 
 class grad_solver_result(object):
+    """
+    A class representing a result of solving a system of linear equations by the gradsolv solvers.
+    
+    Attributes:
+        x (ndarray): solution of the given system of linear equations
+
+        iterations (int): number of the iterations performed by the gradsolv solver
+
+        relres_vec (nadrray): convergence history of relative residual (if include_relres_vec=True)
+    """
 
     def __init__(self, x: ndarray, iterations: int, relres_vec: ndarray):
 
@@ -14,12 +24,18 @@ class grad_solver_result(object):
         self.relres_vec = relres_vec
 
 class grad_solver(object):
+    """
+    A class representing a gradient iterative solver.
+    """
 
     def __init__(self):
 
         self._preconditioner = None
 
     def set_preconditioner(self, preconditioner: grad_preconditioner):
+        """
+        A method used to set the gradsolv preconditioner that will be applied to the gradsolv solver.
+        """
 
         self._preconditioner = preconditioner
 
@@ -28,6 +44,11 @@ class grad_solver(object):
         raise NotImplementedError()
 
     def solve(self, matrix: ndarray, rhs: ndarray, error_handle: error_handle, tol: float, max_it: int, include_relres_vec=False) -> grad_solver_result:
+        """
+        A method used to perform solving of the given system of linear equations by the gradsolv solver.
+
+        If an error occurs, it is stored in the given instance of the class error_handle.
+        """
 
         error_occured = False
 
@@ -69,6 +90,9 @@ class grad_solver(object):
             return self._solve(matrix, rhs, error_handle, tol, max_it, include_relres_vec)
     
 class steepest_descend_solver(grad_solver):
+    """
+    A class representing steepest descend solver.
+    """
 
     def __init__(self):
 
@@ -118,6 +142,9 @@ class steepest_descend_solver(grad_solver):
         return grad_solver_result(x, n_it, relres_vec)
 
 class conjugate_gradient_solver(grad_solver):
+    """
+    A class representing conjugate gradient solver.
+    """
 
     def __init__(self):
 

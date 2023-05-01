@@ -9,12 +9,18 @@ class grad_preconditioner(object):
         raise NotImplementedError()
     
 class diagonal_preconditioner(grad_preconditioner):
+    """
+    A class representing diagonal preconditioner.
+    """
 
     def __call__(self, matrix: ndarray, r: ndarray) -> ndarray:
         
         return _aux._diagonal_solve(matrix, r)
     
 class gauss_seidel_DLDLT_preconditioner(grad_preconditioner):
+    """
+    A class representing Gauss-Seidel DLDLT preconditioner.
+    """
 
     def __call__(self, matrix: ndarray, r: ndarray) -> ndarray:
         from numpy import tril, diagflat, diag
@@ -28,6 +34,9 @@ class gauss_seidel_DLDLT_preconditioner(grad_preconditioner):
         return z
 
 class gauss_seidel_LDDLD_preconditioner(grad_preconditioner):
+    """
+    A class representing Gauss-Seidel LDDLD preconditioner.
+    """
 
     def __call__(self, matrix: ndarray, r: ndarray) -> ndarray:
         from numpy import tril, diagflat, diag
